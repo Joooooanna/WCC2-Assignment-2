@@ -99,8 +99,9 @@ class Ball {
     this.y = this.yOrigin;
 
     // randomize the x and y speed
-    this.xSpeed = random(-5, 5);
-    this.ySpeed = random(3, 4);
+    // this.xSpeed = random(-5, 5);
+    this.xSpeed = random(-1, 1);
+    this.ySpeed = random(1, 2);
 
     // set the ball to not move when it is reset
     this.isThrown = false;

@@ -17,17 +17,17 @@ let bricks = [];
 let COLUMNS = 8;
 // Determines the number of rows for the birck grid.
 let ROWS = 5;
-
+let padSpeed=0;
 
 function setup() {
   // canvas = createCanvas(windowWidth, windowHeight, WEBGL);
-  canvas = createCanvas(550, 550);
+  canvas = createCanvas(600, 700);
 
     // Initialize the ball.
     ball = new Ball(width / 2, 320, 20);
 
     // Initialize the paddle at bottom of screen.
-    pad = new Paddle(width / 2, 450, 100, 10);
+    pad = new Paddle(width / 2, 600, 100, 10);
     
     // Create the grid of bricks.
     for (let i = 0; i < COLUMNS; i++) {
@@ -69,10 +69,12 @@ function draw() {
   
     // Display the ball on the screen.
     ball.display();
-  
+    
+    pad.move(padSpeed);
+
     // Display the paddle.
     pad.display();
-
+    
 /////!!!!!!!!
     // console.log(pad.display());
 
@@ -108,15 +110,38 @@ function unpackOSC(message){
   // }
 
   //uses the rotation rate to keep rotating in a certain direction
-  if(message.address == "/ZIGSIM/q84uurrzNFriE5kI/gyro"){ // 
+  if(message.address == "/ZIGSIM/q84uurrzNFriE5kI/quaternion"){ // 
 
     
-    const mySpeed = map(message.args[0],-3,3,-30,30);
-    console.log( 'message.x: ',message.args[0],' mySpeed: ',mySpeed  )
-    pad.move(mySpeed);
+    // const mySpeed = map(message.args[0],-3,3,-30,30);
+    // console.log( 'message.x: ',message.args[0],' mySpeed: ',mySpeed  )
+    // pad.move(mySpeed);
     // roll += map(message.args[0],-3,3,-0.1,0.1);
     // pitch += map(message.args[1],-3,3,-0.1,0.1);
     // yaw += map(message.args[2],-3,3,-0.1,0.1);
+
+    if (message.args[1]>0.1){
+      // pad.move(20)
+      // padSpeed=5
+
+      if (padSpeed<2){
+        padSpeed+=0.1
+      }
+    }
+
+    else if (message.args[1]<-0.1){
+      // // pad.move(-20)
+      // padSpeed=-5
+      if (padSpeed>-2){
+        padSpeed-=0.1
+      }
+    }
+
+    else{
+      // pad.move(-20)
+      padSpeed=0
+
+    }
   }
 }
 
