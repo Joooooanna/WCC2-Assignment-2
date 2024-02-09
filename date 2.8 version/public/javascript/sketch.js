@@ -20,14 +20,14 @@ let ROWS = 5;
 let padSpeed=0;
 
 function setup() {
-  // canvas = createCanvas(windowWidth, windowHeight, WEBGL);
-  canvas = createCanvas(600, 700);
+  canvas = createCanvas(windowWidth, windowHeight);
+  // canvas = createCanvas(600, 700);
 
     // Initialize the ball.
     ball = new Ball(width / 2, 320, 20);
 
     // Initialize the paddle at bottom of screen.
-    pad = new Paddle(width / 2, 600, 100, 10);
+    pad = new Paddle(width / 2, 900, 100, 10);
     
     // Create the grid of bricks.
     for (let i = 0; i < COLUMNS; i++) {
