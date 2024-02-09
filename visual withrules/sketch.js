@@ -154,8 +154,8 @@ function initGame() {
   imgs.forEach((brick, i) => {
     brick.x = ((i) % 5) * 110; // Positions for pictures remain unchanged
     brick.y = Math.floor((i) / 5) * 110 + 50; // Optionally adjust Y position to add space at the top
-    brick.width = 70;
-    brick.height = 70;
+    brick.width = 60;
+    brick.height = 60;
     brick.isAlive = true;
   });
   ball = new Ball(width / 2, height - 150, 20); // Adjust the ball's initial Y position
@@ -164,7 +164,7 @@ function initGame() {
 }
 
 function draw() {
-  background(flicker ? 238 : 139, 130, 238);
+  background(flicker ? 238 : 139, 130, 238); // Flicker effect
   flicker = !flicker;
 
   if (bgImg) {
@@ -173,10 +173,11 @@ function draw() {
     blendMode(BLEND);
   }
 
-  // Display bricks
+  // Display bricks with shake effect
   imgs.forEach(brick => {
     if (brick.isAlive) {
-      image(brick.img, brick.x, brick.y, brick.width, brick.height);
+      let shakeX = random(-2, 2); // Small horizontal shake
+      image(brick.img, brick.x + shakeX, brick.y, brick.width, brick.height);
     }
   });
 
@@ -224,7 +225,7 @@ class Ball {
   }
 
   display() {
-    fill(255, 255, 0);
+    fill(214, 244, 249);
     noStroke();
     ellipse(this.x, this.y, this.size);
   }
